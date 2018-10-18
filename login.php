@@ -1,16 +1,17 @@
 <?php
 /**
- * MINI-CMS PROJECT
+ * OWASAP - Open Web Application Security Project
  * ____________________________________
- * M2105 - DUT R&T - IUT de Caen
- * Année Universitaire : 2013-2014
+ * Copyright 2018
+ *
  * ____________________________________
  *
- * @categories	Systems Administration, Education
+ * @categories	Security Project
  * @package		Mini-CMS
  * @author		Nikita ROUSSEAU
- * @author		Simon MESNAGE
- * @copyright	2014
+ * @author		Joël CANCELA
+ * @author		Francois MELKONIAN
+ * @copyright	2018
  */
 
 $TITLE = 'Admin Login';
@@ -36,7 +37,7 @@ catch (PDOException $e) {
 }
 
 /**
- * Retrive more configuration settings from the MySQL database
+ * Retrieve more configuration settings from the MySQL database
  */
 try {
 	$sth = $dbh->prepare("
@@ -79,7 +80,7 @@ if (!empty($_SESSION['lockout']) && ((time() - 60 * 10) < $_SESSION['lockout']))
 {
 ?>
 			<div class="alert alert-block">
-				<h4 class="alert-heading"><?php echo 'Too Many Incorrect Login Attempts'; ?></h4>
+				<h4 class="alert-heading">Too Many Incorrect Login Attempts</h4>
 			</div>
 <?php
 }

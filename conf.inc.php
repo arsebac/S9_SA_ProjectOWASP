@@ -13,7 +13,7 @@
 	define('CONF_FILE', CONF_DIR.'/conf.ini');
 	define('STYLE_DIR', PROJECT_DIR.'/bootstrap/');
 	define('TEMPLATES_DIR', STYLE_DIR.'/css/themes/');
-	define('FORMS_DIR', PROJECT_DIR.'/includes/forms/');
+	define('VIEWS_DIR', PROJECT_DIR.'/includes/views/');
 	define('UPLOADS_DIR', PROJECT_DIR.'/uploads/');
 	// </DO NOT CHANGE>
 

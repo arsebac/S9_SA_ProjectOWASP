@@ -1,16 +1,17 @@
 <?php
 /**
- * MINI-CMS PROJECT
+ * OWASAP - Open Web Application Security Project
  * ____________________________________
- * M2105 - DUT R&T - IUT de Caen
- * Année Universitaire : 2013-2014
+ * Copyright 2018
+ *
  * ____________________________________
  *
- * @categories	Systems Administration, Education
+ * @categories	Security Project
  * @package		Mini-CMS
  * @author		Nikita ROUSSEAU
- * @author		Simon MESNAGE
- * @copyright	2014
+ * @author		Joël CANCELA
+ * @author		Francois MELKONIAN
+ * @copyright	2018
  */
 
 /**
@@ -50,7 +51,6 @@ if (isset($_SESSION['msg1']) && isset($_SESSION['msg2']) && isset($_SESSION['msg
 	unset($_SESSION['msg-type']);
 }
 /**
- *
  */
 
 

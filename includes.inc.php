@@ -1,16 +1,17 @@
 <?php
 /**
- * MINI-CMS PROJECT
+ * OWASAP - Open Web Application Security Project
  * ____________________________________
- * M2105 - DUT R&T - IUT de Caen
- * Année Universitaire : 2013-2014
+ * Copyright 2018
+ *
  * ____________________________________
  *
- * @categories	Systems Administration, Education
+ * @categories	Security Project
  * @package		Mini-CMS
  * @author		Nikita ROUSSEAU
- * @author		Simon MESNAGE
- * @copyright	2014
+ * @author		Joël CANCELA
+ * @author		Francois MELKONIAN
+ * @copyright	2018
  */
 
 //Prevent direct access
@@ -82,7 +83,7 @@ if (!defined('INSTALL_MODE')) {
 	try {
 		$sth = $dbh->prepare("
 				SELECT id, name
-				FROM ".DBNAME.".".DBPREFIX."admins
+				FROM ".DBNAME.".".DBPREFIX."admin
 				WHERE `login` = ".$dbh->quote($_SESSION['adminLogin'])."
 				;");
 	

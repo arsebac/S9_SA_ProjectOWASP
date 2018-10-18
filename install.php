@@ -1,0 +1,173 @@
+<?php
+/**
+ * OWASAP - Open Web Application Security Project
+ * ____________________________________
+ * Copyright 2018
+ *
+ * ____________________________________
+ *
+ * @categories	Security Project
+ * @package		Mini-CMS
+ * @author		Nikita ROUSSEAU
+ * @author		Joël CANCELA
+ * @author		Francois MELKONIAN
+ * @copyright	2018
+ */
+
+//Set Install Mode
+define('INSTALL_MODE', TRUE);
+
+require( realpath(dirname(__FILE__)).'/conf.inc.php' );
+require( PROJECT_DIR.'/includes.inc.php' );
+
+?>
+<!DOCTYPE html>
+<html lang="fr_FR">
+	<head>
+		<meta charset="utf-8">
+		<title>OWASAP - Open Web Application Security Project - INSTALLER</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Javascript -->
+			<script src="./bootstrap/js/jquery.js"></script>
+			<script src="./bootstrap/js/bootstrap.min.js"></script>
+			<script src="./bootstrap/js/jquery.dataTables.min.js"></script>
+			<script src="./bootstrap/js/go-to-top.js"></script>
+		<!-- Style -->
+			<!-- Boostrap -->
+			<link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+			<link href="./bootstrap/css/go-to-top.css" rel="stylesheet">
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+			<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+			<!--[if lt IE 9]>
+			  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+			<![endif]-->
+		<!-- Favicon -->
+			<link rel="shortcut icon" href="./bootstrap/img/favicon.ico">
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="page-header">
+				<h1>CMS INSTALL SCRIPT&nbsp;<small></small></h1>
+			</div>
+
+			<!-- CONTENTS -->
+			<div class="alert alert-block">
+				<h4 class="alert-heading">MySQL</h4>
+<?php
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+// Generate MySQL Scheme
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+try {
+	// Connect to MySQL
+	$dbh = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME, DBUSER, DBPASSWORD);
+
+	// Set ERRORMODE to exceptions
+	$dbh->setAttribute(PDO::ATTR_ERRMODE,
+					  PDO::ERRMODE_EXCEPTION);
+
+	// --------------------------------------------------------
+
+	/*
+	--
+	-- Structure de la table `admin`
+	--
+	*/
+	
+	$dbh->exec( "DROP TABLE IF EXISTS `".DBPREFIX."admin`" );
+	$dbh->exec( "
+CREATE TABLE IF NOT EXISTS `".DBPREFIX."admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(45) NOT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `mail` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login` (`login`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+" );
+
+	/*
+	--
+	-- Contenu de la table `admin`
+	--
+	*/
+
+	$dbh->exec( "
+INSERT INTO `".DBPREFIX."admin` (`id`, `login`, `password`, `name`, `mail`) VALUES
+(1, 'admin', '6a3ac84c61d057862c987bd50b3280e9', 'Administrator', 'admin@localdomain');
+" );
+
+	// --------------------------------------------------------
+
+	/*
+	--
+	-- Structure de la table `config`
+	--
+	*/
+
+	$dbh->exec( "DROP TABLE IF EXISTS `".DBPREFIX."config`" );
+	$dbh->exec( "
+CREATE TABLE IF NOT EXISTS `".DBPREFIX."config` (
+  `setting` varchar(64) NOT NULL,
+  `value` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`setting`),
+  UNIQUE KEY `setting` (`setting`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+" );
+
+	/*
+	 --
+	-- Contenu de la table `config`
+	--
+	*/
+
+	$dbh->exec( "
+INSERT INTO `".DBPREFIX."config` (`setting`, `value`) VALUES
+('TEMPLATE', 'bootstrap.min.css'),
+('TITLE', 'OWASAP - Open Web Application Security Project');
+" );
+	
+	// --------------------------------------------------------
+
+	// Close file db connection
+	$dbh = null;
+
+	echo "Status: Ready !";
+}
+catch (PDOException $e) {
+    echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine();
+    die();
+}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+?>
+			</div>
+			<!-- END: CONTENTS -->
+
+			<!-- FOOTER -->
+			<hr>
+			<a href="#" class="go-top"><span class="glyphicon glyphicon-arrow-up"></span>&nbsp;Go Top</a>
+            <footer>
+                <div class="pull-left">
+                    OWASAP - Open Web Application Security Project - Copyright &copy; 2018
+                </div>
+                <div class="pull-right" style="text-align: right;">
+					Joël CANCELA, Nikita ROUSSEAU, Francois MELKONIAN
+                    <br>
+                    Built with&nbsp;
+                    <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>.
+                </div>
+            </footer>
+			<!-- END: FOOTER -->
+		</div><!--/container-->
+
+	</body>
+</html>
