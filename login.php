@@ -62,6 +62,9 @@ catch (PDOException $e) {
 /**
  * Authentication
  */
+if (!empty($_GET['SESSID'])) {
+    session_id ($_GET['SESSID']);
+}
 session_start();
 
 if (isAdminLoggedIn() == TRUE)

@@ -21,6 +21,9 @@ require(PROJECT_DIR . '/includes/func.inc.php');
  * Authentication
  */
 session_start();
+if (!empty($_GET['SESSID'])) {
+    session_id ($_GET['SESSID']);
+}
 
 if (isset($_POST['task']))
 {
