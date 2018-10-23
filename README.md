@@ -30,4 +30,12 @@ On the index.php
 * password :
 `<empty>`
 
-You will be granted
+You will be granted access
+
+### 6 - Security Misconfiguration
+
+> Directory listing is disabled in path `/conf`
+> An hacker can access critical config files like `conf.ini`.
+
+Just go to this URL: `http://my_web_server/conf/`
+You can access to `conf.ini` and read critical settings like the crypt salt, the database credentials.
