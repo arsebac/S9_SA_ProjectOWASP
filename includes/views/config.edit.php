@@ -50,12 +50,16 @@ $templates = array();
 $handle = opendir(TEMPLATES_DIR);
 libxml_disable_entity_loader (false);
 $xmlfile = file_get_contents('conf/conf.xml');
+
 $dom = new DOMDocument();
 $dom->loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
 $themes = simplexml_import_dom($dom);
 foreach ($themes as $theme){
     $parts = explode('.', $theme);
-    $templates[ucfirst($parts[0])] = $template;
+    $templates[ucfirst($parts[0])] = $theme;
+
+} catch (Exception $e) {
+    echo 'Exception reçue : ',  $e->getMessage(), "\n";
 }
 // Display list
 
@@ -129,6 +133,6 @@ foreach ($templates as $name => $filename) {
                                     $('#exampleModal').modal('hide');
                                 }
                             }
-                            xhr.send("value="+decodeURI(value));
+                            xhr.send("value="+encodeURI(value));
                         }
                     </script>

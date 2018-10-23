@@ -74,6 +74,10 @@ switch ($VIEW)
 								<span class="glyphicon glyphicon-wrench"></span>
 								<span class="glyphicon-class">Configuration Panel</span>
 							</li>
+                            <li href="#"  data-toggle="modal" data-target="#exampleModal" type="button">
+                                <span class="glyphicon glyphicon-modal-window"></span>
+                                <span class="glyphicon-class material-icons">Configuration Panel</span>
+                            </li>
 						</ul>
 					</div>
 
@@ -82,6 +86,7 @@ switch ($VIEW)
 					{
 						window.location.href='dashboard.php?view='+location;
 					}
+
 					</script>
 
 <?php

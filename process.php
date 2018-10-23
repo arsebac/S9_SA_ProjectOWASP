@@ -33,7 +33,6 @@ switch($TASK)
 {
 	case 'config edit':
 		$name = $_POST['name'];
-		$template = $_POST['template'];
 
 		if (empty($name)) {
 			$name = 'OWASAP - Open Web Application Security Project';
@@ -63,10 +62,10 @@ switch($TASK)
 			value		= :value
 	 	WHERE
 			setting = :setting" );
-		
+
 		$db_query->bindValue(':value', $template);
 		$db_query->bindValue(':setting', 'TEMPLATE');
-		
+
 		$db_query->execute();
 
 		// REDIRECT
