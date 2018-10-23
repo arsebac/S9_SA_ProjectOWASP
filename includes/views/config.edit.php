@@ -35,8 +35,10 @@ if (!defined('LICENSE'))
 										</div>
 									</div>
 
-									<div class="form-group">
+                                    <div class="form-group">
 										<label for="template">Theme</label>
+                                    </div>
+                                    <div class="form-row">
 										<select class="form-control" id="template" name="template">
 											<optgroup label="Available Themes">
 <?php 
@@ -44,23 +46,17 @@ if (!defined('LICENSE'))
 // Get templates
 
 $templates = array();
+
 $handle = opendir(TEMPLATES_DIR);
-
-if ($handle) {
-	while (false !== ($template = readdir($handle))) {
-		// Strip out . and ..
-		if ( ($template != '.') && ($template != '..') ) {
-			$parts = explode('.', $template);
-			if (strpos($template, ".map")) {
-                continue;
-            }
-			$templates[ucfirst($parts[0])] = $template;
-		}
-	}
-
-	closedir($handle);
+libxml_disable_entity_loader (false);
+$xmlfile = file_get_contents('conf/conf.xml');
+$dom = new DOMDocument();
+$dom->loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+$themes = simplexml_import_dom($dom);
+foreach ($themes as $theme){
+    $parts = explode('.', $theme);
+    $templates[ucfirst($parts[0])] = $template;
 }
-
 // Display list
 
 foreach ($templates as $name => $filename) {
@@ -79,6 +75,12 @@ foreach ($templates as $name => $filename) {
 ?>
 											</optgroup>
 										</select>
+
+
+                                        <div class="col-auto">
+
+                                            <button type="button" href="#"  data-toggle="modal" data-target="#exampleModal">Edit</button>
+                                        </div>
 									</div>
 
 									<div class="row">
@@ -89,4 +91,44 @@ foreach ($templates as $name => $filename) {
 								</div>
 							</form>
 						</div>
-					</fieldset>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit website style</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h2>Actual configuration</h2>
+                                        <textarea name="conf" id="new-conf" cols="40" rows="15"><?php echo filter_var ( file_get_contents("conf/conf.xml"), FILTER_SANITIZE_FULL_SPECIAL_CHARS); ?></textarea>
+                                        <h3>Default configuration</h3>
+                                        <textarea name="conf" cols="40" rows="15" readonly><?php echo file_get_contents("conf/conf.default.xml", true); ?></textarea>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" onclick="updateConf()">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <script>
+                        function updateConf() {
+                            var value = document.getElementById("new-conf").value;
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", 'template.php', true);
+
+                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                            xhr.onreadystatechange = function() {//Call a function when the state changes.
+                                if(this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                                    $('#exampleModal').modal('hide');
+                                }
+                            }
+                            xhr.send("value="+decodeURI(value));
+                        }
+                    </script>
