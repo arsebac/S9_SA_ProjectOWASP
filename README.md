@@ -31,3 +31,28 @@ On the index.php
 `<empty>`
 
 You will be granted
+
+### 2 - Broken Authentication : SESSION TOKEN FIXATION
+
+> The application relies on two process to resolve the session :
+- A session cookie : `PHPSESSID`
+- URL Encoded session : `?SESSID=XXXXXXXXXXXXX`
+> An hacker may be able to read this token and use it in order to access the system without being granted.
+
+1) Forge a prepared URL with a fixed SESSID like `localhost/owasp/login.php?SESSID=jcanmp1m9tpcpjadi55bjg19bf`.
+ - This is the `HACKER MALICIOUS URL` that will be spread to a victim.
+ - In fact, the SESSID `jcanmp1m9tpcpjadi55bjg19bf` is the session id of the hacker.
+ - The victim connects with Firefox
+2) The victim connects to the application via this URL with his credentials
+3) Once the victim connected, use the application because of the fixed session id.
+ - The hacker connects via google chrome with `http://localhost/owasp/dashboard.php`
+
+Bad code is :
+```php
+if (!empty($_GET['SESSID'])) {
+    session_id ($_GET['SESSID']);
+}
+```
+
+before `session_start()` anywhere in the project
+

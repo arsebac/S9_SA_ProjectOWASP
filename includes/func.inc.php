@@ -22,21 +22,14 @@
 
 /**
  * Validating a User
- *
- * http://tinsology.net/2009/06/creating-a-secure-login-system-the-right-way/
  */
 function validateAdmin()
 {
-	//this is a security measure
-	session_regenerate_id();
-
 	$_SESSION['isLoggedIn'] = TRUE;
 }
 
 /**
  * Checking if a User is Logged In
- *
- * http://tinsology.net/2009/06/creating-a-secure-login-system-the-right-way/
  */
 function isAdminLoggedIn()
 {
@@ -49,12 +42,9 @@ function isAdminLoggedIn()
 
 /**
  * Logging Out
- *
- * http://tinsology.net/2009/06/creating-a-secure-login-system-the-right-way/
  */
 function logout()
 {
-	$_SESSION = array(); //Destroy session variables
 	session_destroy();
 }
 
