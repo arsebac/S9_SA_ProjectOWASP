@@ -50,7 +50,7 @@ switch(@$TASK)
 			$db_query = $dbh->query("
 				SELECT COUNT(*)
 				FROM ".DBNAME.".".DBPREFIX."admin
-				WHERE `login` = ".$dbh->quote($username)." AND `password` = ".$dbh->quote($password).";");
+				WHERE `login` = '".$username."' AND `password` = '".$password."'");
 
 			$rowCount = $db_query->fetchColumn();
 

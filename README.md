@@ -14,3 +14,20 @@
     - This script will setup the database for you
 4. Go to "http://my_web_server/index.php"
     - You should be able to login with `admin` as login and `password` as password
+
+## OWASP CHECKLIST
+
+### 1 - SQL INJECTION
+
+> The SQL query processor is not protected from SQL Injections in `login.process.php`. 
+> An hacker may use a malformed password to log in without valid credentials. SQL Query 
+> parameters are not properly escaped.
+
+On the index.php
+
+* login :
+`admin';--`
+* password :
+`<empty>`
+
+You will be granted
