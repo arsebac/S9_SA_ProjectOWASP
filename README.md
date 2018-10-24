@@ -63,3 +63,8 @@ before `session_start()` anywhere in the project...
 Just go to this URL: `http://my_web_server/conf/`
 You can access to `conf.ini` and read critical settings like the crypt salt, the database credentials.
 
+#### 10 - Insufficient Logging&Monitoring
+
+The authentication mechanism log all tries in local, available for a people who know how to access to it.
+`http://localhost/owasp/log.txt`
+

