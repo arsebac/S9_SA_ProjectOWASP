@@ -79,7 +79,116 @@ switch($TASK)
 
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-	default:
+    case 'article add':
+        $title = $_POST['title'];
+        $header = $_POST['header'];
+        $body = $_POST['body'];
+        $footer = $_POST['footer'];
+        $publisherId = $_POST['idAuthor'];
+
+        // VERIFY INPUTS
+        if (empty($title)) {
+            $_SESSION['msg1'] = 'Erreur lors de la saisie du formulaire !';
+            $_SESSION['msg2'] = '';
+            $_SESSION['msg-type'] = 'warning';
+            header( "Location: dashboard.php?view=".'article'.'&task='.'add' );
+            die();
+        }
+
+        // INSET INTO DATABASE
+        $db_query = $dbh->prepare( "INSERT INTO ".DBNAME.".".DBPREFIX."article
+						(title, header, body, footer, idAuthor)
+					   VALUES
+						(:title, :header, :body, :footer, :idAuthor) " );
+
+        $db_query->bindValue(':title', $title);
+        $db_query->bindValue(':header', $header);
+        $db_query->bindValue(':body', $body);
+        $db_query->bindValue(':footer', $footer);
+        $db_query->bindValue(':idAuthor', $publisherId);
+
+        $db_query->execute();
+
+        // REDIRECT
+        $_SESSION['msg1'] = 'Article Ajouté !';
+        $_SESSION['msg2'] = "";
+        $_SESSION['msg-type'] = 'success';
+        header( "Location: dashboard.php?view="."article" );
+        die();
+
+        break;
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    case 'article edit':
+        $idArticle = $_POST['idArticle'];
+        $title = $_POST['title'];
+        $header = $_POST['header'];
+        $body = $_POST['body'];
+        $footer = $_POST['footer'];
+        $publisherId = $_POST['idAuthor'];
+
+        // VERIFY INPUTS
+        if (empty($title) || empty($idArticle)) {
+            $_SESSION['msg1'] = 'Erreur lors de la saisie du formulaire !';
+            $_SESSION['msg2'] = '';
+            $_SESSION['msg-type'] = 'warning';
+            header( "Location: dashboard.php?view=".'article'.'&task='.'edit' );
+            die();
+        }
+
+        // INSET INTO DATABASE
+        $db_query = $dbh->prepare( "UPDATE ".DBNAME.".".DBPREFIX."article
+	  	SET
+			title		  = :title,
+			header		  = :header,
+			body		  = :body,
+			footer		  = :footer,
+			idAuthor	  = :idAuthor
+	 	WHERE
+			id = :id" );
+
+        $db_query->bindValue(':id', $idArticle);
+        $db_query->bindValue(':title', $title);
+        $db_query->bindValue(':header', $header);
+        $db_query->bindValue(':body', $body);
+        $db_query->bindValue(':footer', $footer);
+        $db_query->bindValue(':idAuthor', $publisherId);
+
+        $db_query->execute();
+
+        // REDIRECT
+        $_SESSION['msg1'] = 'Article Modifié !';
+        $_SESSION['msg2'] = "";
+        $_SESSION['msg-type'] = 'success';
+        header( "Location: dashboard.php?view="."article" );
+        die();
+
+        break;
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    case 'article del':
+        $idArticle = $_GET['id'];
+
+        // Ready for deletion
+
+        $db_query = $dbh->prepare( "DELETE FROM ".DBNAME.".".DBPREFIX."article WHERE id = :id" );
+        $db_query->bindValue(':id', $idArticle);
+        $db_query->execute();
+
+        // REDIRECT
+        $_SESSION['msg1'] = 'Article Supprimé !';
+        $_SESSION['msg2'] = '';
+        $_SESSION['msg-type'] = 'success';
+        header( "Location: dashboard.php?view="."article" );
+        die();
+
+        break;
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    default:
 		exit('<h1><b>Error: unknown task !</b></h1>');
 }
 

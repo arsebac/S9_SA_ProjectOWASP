@@ -68,6 +68,25 @@ try {
 
 	// --------------------------------------------------------
 
+    /*
+    --
+    -- Structure de la table `article`
+    --
+    */
+
+    $dbh->exec( "DROP TABLE IF EXISTS `".DBPREFIX."article`" );
+    $dbh->exec( "
+CREATE TABLE IF NOT EXISTS `".DBPREFIX."article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100),
+  `header` longtext,
+  `body` longtext,
+  `footer` longtext,
+  `idAuthor` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+" );
+
 	/*
 	--
 	-- Structure de la table `user`
