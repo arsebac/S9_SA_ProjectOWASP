@@ -17,6 +17,11 @@
 	define('UPLOADS_DIR', PROJECT_DIR.'/uploads/');
 	// </DO NOT CHANGE>
 
+    /**
+     * SECRET API KEY
+     */
+    define('API_KEY', 'b0955e13a8fb37eced8cee17a5ecd51f');
+
 	/**
 	 * Global Configuration
 	 */

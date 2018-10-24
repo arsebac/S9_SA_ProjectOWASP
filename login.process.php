@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASAP - Open Web Application Security Project
+ * OWASP - Open Web Application Security Project
  * ____________________________________
  * Copyright 2018
  *
@@ -52,7 +52,7 @@ switch(@$TASK)
 			// Query
 			$db_query = $dbh->query("
 				SELECT COUNT(*)
-				FROM ".DBNAME.".".DBPREFIX."admin
+				FROM ".DBNAME.".".DBPREFIX."user
 				WHERE `login` = '".$username."' AND `password` = '".$password."'");
 
 			$rowCount = $db_query->fetchColumn();
@@ -71,7 +71,7 @@ switch(@$TASK)
 			validateAdmin();
 
 			// Store login
-			$_SESSION['adminLogin'] = $username;
+			$_SESSION['userLogin'] = $username;
 
 			// RememberMe
 			if (!empty($rememberMe)) {
@@ -81,34 +81,12 @@ switch(@$TASK)
 				setcookie('rememberMe', 'void', strtotime( '-1 days' ));
 			}
 
-			if (!empty($_SESSION['loginattempt']))
-			{
-				unset($_SESSION['loginattempt']);
-			}
-			if (!empty($_SESSION['lockout']))
-			{
-				unset($_SESSION['lockout']);
-			}
-
 			header( "Location: dashboard.php" );
 			die();
 		}
 
-		// No rows matched
-		// Login failed.
-
-		$_SESSION['loginerror'] = TRUE;
-		@$_SESSION['loginattempt']++;
-		if (4 < $_SESSION['loginattempt'])
-		{
-			$_SESSION['lockout'] = time();
-			$_SESSION['loginattempt'] = 0; //Reseting attempts as the user will be ban for 5 mins
-		}
-
 		header( "Location: login.php" );
 		die();
-
-
 
 	case 'logout':
 		if (isAdminLoggedIn() == TRUE)
@@ -121,8 +99,6 @@ switch(@$TASK)
 		{
 			exit('Not logged in');
 		}
-
-
 
 	default:
 		exit('<h1><b>Error</b></h1>');

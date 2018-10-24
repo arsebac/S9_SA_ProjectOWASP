@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASAP - Open Web Application Security Project
+ * OWASP - Open Web Application Security Project
  * ____________________________________
  * Copyright 2018
  *
@@ -59,7 +59,7 @@ if (!defined('LICENSE'))
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">OWASAP - Open Web Application Security Project</a>
+				<a class="navbar-brand" href="#">OWASP - Open Web Application Security Project</a>
 			</div>
 
 			<!-- START: navbar-collapse -->
@@ -85,6 +85,17 @@ if ($PAGE != 'login')
 							&nbsp;Dashboard
 						</a>
 					</li>
+                    <?php
+
+                    if (session_status() != PHP_SESSION_NONE && unserialize($_SESSION['user'])['role'] == 'Administrator') {
+                    ?>
+                    <li>
+                        <?php echo generateNavigationLi('apikey', 'glyphicon-pushpin'); ?>
+                    </li>
+                    <?php
+                    }
+
+                    ?>
 
 					<li <?php
 	if (($PAGE == 'dashboard') && ($VIEW == 'config'))

@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASAP - Open Web Application Security Project
+ * OWASP - Open Web Application Security Project
  * ____________________________________
  * Copyright 2018
  *
@@ -82,24 +82,21 @@ if (!defined('INSTALL_MODE')) {
 	/**
 	 * $_SESSION Vars as Env Vars
 	 */
-	// Get admin information
+	// Get user information
 	try {
 		$sth = $dbh->prepare("
-				SELECT id, name
-				FROM ".DBNAME.".".DBPREFIX."admin
-				WHERE `login` = ".$dbh->quote($_SESSION['adminLogin'])."
+				SELECT id, role, login, firstname, lastname
+				FROM ".DBNAME.".".DBPREFIX."user
+				WHERE `login` = ".$dbh->quote($_SESSION['userLogin'])."
 				;");
 	
 		$sth->execute();
-		$admin = $sth->fetch(PDO::FETCH_ASSOC);
-		
-		$_SESSION['adminId'] = $admin['id'];
-		$_SESSION['adminName'] = $admin['name'];
+		$user = $sth->fetch(PDO::FETCH_ASSOC);
+
+		$_SESSION['user'] = serialize($user);
 	}
 	catch (PDOException $e) {
 		echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine();
 		die();
 	}
-
-
 }

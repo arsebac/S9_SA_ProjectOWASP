@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASAP - Open Web Application Security Project
+ * OWASP - Open Web Application Security Project
  * ____________________________________
  * Copyright 2018
  *
@@ -35,7 +35,7 @@ switch($TASK)
 		$name = $_POST['name'];
 
 		if (empty($name)) {
-			$name = 'OWASAP - Open Web Application Security Project';
+			$name = 'OWASP - Open Web Application Security Project';
 		}
 
 		if (empty($template)) {
