@@ -20,16 +20,15 @@ $PAGE = 'login';
 
 require( realpath(dirname(__FILE__)).'/conf.inc.php' );
 require( PROJECT_DIR.'/includes/func.inc.php' );
+error_reporting(0);
 
 /**
  * MySQL connection
  */
 try {
 	// Connect to MySQL
-	$dbh = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME, DBUSER, DBPASSWORD);
-
-	// Set errormode to exceptions
-	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $connect = mysql_connect(DBHOST,DBUSER,DBPASSWORD);
+    mysql_select_db(DBNAME) or die(mysql_error());
 }
 catch (PDOException $e) {
 	echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine();
@@ -40,19 +39,17 @@ catch (PDOException $e) {
  * Retrieve more configuration settings from the MySQL database
  */
 try {
-	$sth = $dbh->prepare("
+
+
+    $result = mysql_query("
 			SELECT *
 			FROM ".DBNAME.".".DBPREFIX."config
 			;");
-
-	$sth->execute();
-	$settings = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-	foreach ($settings as $setting) {
-			define( $setting['setting'], $setting['value'] );
-	}
-
-	unset($settings, $dbh);
+    while ($row = mysql_fetch_assoc($result)) {
+        define( $row['setting'], $row['value'] );
+    }
+	unset($settings);
+    mysql_close($connect);
 }
 catch (PDOException $e) {
 	echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine();
