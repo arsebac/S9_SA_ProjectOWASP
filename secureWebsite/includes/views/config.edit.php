@@ -47,13 +47,10 @@ if (!defined('LICENSE'))
 
 $templates = array();
 
-$handle = opendir(TEMPLATES_DIR);
-libxml_disable_entity_loader (false);
-$xmlfile = file_get_contents(CONF_DIR."conf.default.xml",true);
-echo $xmlfile;
+$xmlfile = file_get_contents(CONF_DIR."conf.xml",true);
 try{
 $dom = new DOMDocument();
-$dom->loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+$dom->loadXML($xmlfile);
 $themes = simplexml_import_dom($dom);
 foreach ($themes as $theme){
     $parts = explode('.', $theme);

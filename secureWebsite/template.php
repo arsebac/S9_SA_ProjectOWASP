@@ -24,4 +24,4 @@ foreach ($themes->theme as $theme) {
     }
 }
 echo "ok";
-file_put_contents("conf/conf.xml", $themes);
+file_put_contents(CONF_DIR."conf.xml", $themes);
