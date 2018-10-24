@@ -82,8 +82,8 @@ require( STYLE_DIR.'/header.inc.php' );
 
                                     <div class="row">
                                         <div class="form-group col-xs-12">
-                                            <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" value="" required>
+                                            <label for="password">Password (UpperCase, LowerCase, Number/SpecialChar and min 8 Chars)</label>
+                                            <input type="password" class="form-control" id="password" name="password" value="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
                                         </div>
                                     </div>
 
