@@ -13,7 +13,9 @@
 3. Go to "http://my_web_server/install.php"
     - This script will setup the database for you
 4. Go to "http://my_web_server/index.php"
-    - You should be able to login with `admin` as login and `password` as password
+    - You should be able to login with `admin` as login and `Azertyuiop09` as password
+    - You should be able to login with `alice` as login and `Azertyuiop09` as password
+    - You should be able to login with `bob` as login and `password` as password
 
 ## OWASP CHECKLIST
 
@@ -93,3 +95,6 @@ You can access to `conf.ini` and read critical settings like the crypt salt, the
 The authentication mechanism log all tries in local, available for a people who know how to access to it.
 `http://localhost/owasp/log.txt`
 
+## Corrections
+
+- XML style configuration: check if style exists before saving it

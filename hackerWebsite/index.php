@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 $file="messages.txt";
 $messages=file_get_contents($file);
 
