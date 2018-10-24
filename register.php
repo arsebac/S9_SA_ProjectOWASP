@@ -69,21 +69,21 @@ require( STYLE_DIR.'/header.inc.php' );
                     <fieldset>
 						<legend>Register as a new user</legend>
 						<div class="row">
-							<form action="process.php" method="post" role="form">
+							<form action="register.process.php" method="post" role="form">
 								<div class="col-md-9">
 									<input type="hidden" name="task" value="user add" />
 
 									<div class="row">
 										<div class="form-group col-xs-12">
 											<label for="login">Login</label>
-											<input type="text" class="form-control" id="login" name="login" value="">
+											<input type="text" class="form-control" id="login" name="login" value="" required>
 										</div>
 									</div>
 
                                     <div class="row">
                                         <div class="form-group col-xs-12">
                                             <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" value="">
+                                            <input type="password" class="form-control" id="password" name="password" value="" required>
                                         </div>
                                     </div>
 
@@ -104,7 +104,7 @@ require( STYLE_DIR.'/header.inc.php' );
                                     <div class="row">
                                         <div class="form-group col-xs-12">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email" name="email" value="">
+                                            <input type="text" class="form-control" id="email" name="email" value="" required>
                                         </div>
                                     </div>
 
