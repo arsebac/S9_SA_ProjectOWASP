@@ -59,7 +59,7 @@ if (!defined('LICENSE'))
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">OWASP - Open Web Application Security Project</a>
+				<a class="navbar-brand" href="./">OWASP - Open Web Application Security Project</a>
 			</div>
 
 			<!-- START: navbar-collapse -->
@@ -70,7 +70,7 @@ if (!defined('LICENSE'))
 /**
  * "Navigation Bar"
  */
-if ($PAGE != 'login')
+if ($PAGE != 'login' && $PAGE != 'register')
 {
 ?>
 				<ul class="nav navbar-nav">
@@ -92,18 +92,16 @@ if ($PAGE != 'login')
                     <li>
                         <?php echo generateNavigationLi('apikey', 'glyphicon-pushpin'); ?>
                     </li>
+                    <li <?php
+                    if (($PAGE == 'dashboard') && ($VIEW == 'config'))
+                    {
+                        echo "class=\"active\"";
+                    }
+                    ?>><?php echo generateNavigationLi('config', 'glyphicon-wrench'); ?></li>
                     <?php
                     }
 
                     ?>
-
-					<li <?php
-	if (($PAGE == 'dashboard') && ($VIEW == 'config'))
-	{
-		echo "class=\"active\"";
-	}
-?>><?php echo generateNavigationLi('config', 'glyphicon-wrench'); ?></li>
-
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li>
@@ -137,7 +135,7 @@ if ($PAGE != 'login')
 /**
  * "Breadcrumb"
  */
-if ($PAGE != 'login')
+if ($PAGE != 'login' && $PAGE != 'register')
 {
 ?>
 

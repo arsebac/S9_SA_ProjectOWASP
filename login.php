@@ -119,7 +119,8 @@ require( STYLE_DIR.'/header.inc.php' );
 	?>>&nbsp;Remember Me
 										</label>
 									</div>
-									<input class="btn btn-lg btn-info btn-block" type="submit" value="Login">
+									<input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
+                                   <a class="btn btn-lg btn-info btn-block" href="./register.php" role="button">Register</a>
 								</fieldset>
 								</form>
 							</div>

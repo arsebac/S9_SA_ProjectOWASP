@@ -76,14 +76,14 @@ switch ($VIEW)
 
 					<div class="bs-glyphicons">
 						<ul class="bs-glyphicons-list">
-							<li href="#" onclick="dashboardLocation('config')" type="button">
-								<span class="glyphicon glyphicon-wrench"></span>
-								<span class="glyphicon-class">Configuration Panel</span>
-							</li>
                             <?php
 
                             if (session_status() != PHP_SESSION_NONE && unserialize($_SESSION['user'])['role'] == 'Administrator') {
                                 ?>
+                                <li href="#" onclick="dashboardLocation('config')" type="button">
+                                    <span class="glyphicon glyphicon-wrench"></span>
+                                    <span class="glyphicon-class">Configuration Panel</span>
+                                </li>
                                 <li href="#" onclick="dashboardLocation('apikey')" type="button">
                                     <span class="glyphicon glyphicon-lock"></span>
                                     <span class="glyphicon-class">SECRET API KEY</span>
