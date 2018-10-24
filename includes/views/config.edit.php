@@ -49,16 +49,17 @@ $templates = array();
 
 $handle = opendir(TEMPLATES_DIR);
 libxml_disable_entity_loader (false);
-$xmlfile = file_get_contents('conf/conf.xml');
-
+$xmlfile = file_get_contents(__DIR__ ."\..\..\conf\conf.default.xml",true);
+echo $xmlfile;
+try{
 $dom = new DOMDocument();
 $dom->loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
 $themes = simplexml_import_dom($dom);
 foreach ($themes as $theme){
     $parts = explode('.', $theme);
     $templates[ucfirst($parts[0])] = $theme;
-
-} catch (Exception $e) {
+}
+    } catch (Exception $e) {
     echo 'Exception reçue : ',  $e->getMessage(), "\n";
 }
 // Display list
