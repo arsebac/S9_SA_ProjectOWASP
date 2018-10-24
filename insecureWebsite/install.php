@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `".DBPREFIX."user` (
 
 	$dbh->exec( "
 INSERT INTO `".DBPREFIX."user` (`id`, `role`,`login`, `firstname`, `lastname`, `password`, `mail`) VALUES
-(1, 'Administrator', 'admin', '', '', '" . tripleMd5('password', CRYPTOSALT) . "', 'admin@localdomain');
+(1, 'Administrator', 'admin', '', '', '" . tripleMd5('Azertyuiop09', CRYPTOSALT) . "', 'admin@localdomain');
 " );
 
     $dbh->exec( "
@@ -126,7 +126,7 @@ INSERT INTO `".DBPREFIX."user` (`id`, `role`,`login`, `firstname`, `lastname`, `
 
     $dbh->exec( "
 INSERT INTO `".DBPREFIX."user` (`id`, `role`,`login`, `firstname`, `lastname`, `password`, `mail`) VALUES
-(3, 'Regular', 'bob', 'Bob', '', '" . tripleMd5('Qwertyuiop09', CRYPTOSALT) . "', 'bob@localdomain');
+(3, 'Regular', 'bob', 'Bob', '', '" . tripleMd5('password', CRYPTOSALT) . "', 'bob@localdomain');
 " );
 
     // --------------------------------------------------------
