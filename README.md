@@ -95,3 +95,6 @@ You can access to `conf.ini` and read critical settings like the crypt salt, the
 The authentication mechanism log all tries in local, available for a people who know how to access to it.
 `http://localhost/owasp/log.txt`
 
+## Corrections
+
+- XML style configuration: check if style exists before saving it

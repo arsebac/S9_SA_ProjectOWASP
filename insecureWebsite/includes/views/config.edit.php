@@ -49,7 +49,7 @@ $templates = array();
 
 $handle = opendir(TEMPLATES_DIR);
 libxml_disable_entity_loader (false);
-$xmlfile = file_get_contents(CONF_DIR."conf.default.xml",true);
+$xmlfile = file_get_contents(CONF_DIR."conf.xml",true);
 echo $xmlfile;
 try{
 $dom = new DOMDocument();
