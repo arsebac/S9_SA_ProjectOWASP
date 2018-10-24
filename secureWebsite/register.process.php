@@ -30,7 +30,7 @@ switch(@$TASK)
 {
     case 'user add':
         $login = $_POST['login'];
-        $password = tripleMd5($_POST['password'], CRYPTOSALT);
+        $password = $_POST['password'];
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
         $email = $_POST['email'];
@@ -42,6 +42,15 @@ switch(@$TASK)
             header( "Location: register.php" );
             die();
         }
+
+        if (strlen($password) < 8) {
+            $_SESSION['msg1'] = 'password is too short !';
+            $_SESSION['msg2'] = '';
+            $_SESSION['msg-type'] = 'error';
+            header( "Location: register.php" );
+            die();
+        }
+        $password = tripleMd5($password, CRYPTOSALT);
 
         if (empty($firstname)) {
             $firstname = '';
