@@ -90,7 +90,7 @@ switch(@$TASK)
 		die();
 
 	case 'logout':
-		if (isAdminLoggedIn() == TRUE)
+		if (isLoggedIn() == TRUE)
 		{
 			logout();
 			header( "Location: login.php" );

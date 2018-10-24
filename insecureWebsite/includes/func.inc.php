@@ -31,7 +31,7 @@ function validateAdmin()
 /**
  * Checking if a User is Logged In
  */
-function isAdminLoggedIn()
+function isLoggedIn()
 {
 	if (isset($_SESSION['isLoggedIn']) && ($_SESSION['isLoggedIn'] === TRUE))
 	{

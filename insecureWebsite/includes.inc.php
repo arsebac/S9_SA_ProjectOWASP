@@ -34,7 +34,7 @@ if (!defined('INSTALL_MODE')) {
     }
 	session_start();
 
-	if (isAdminLoggedIn() == FALSE) //Check if the user have wanted to access to a protected resource without being logged in
+	if (isLoggedIn() == FALSE) //Check if the user have wanted to access to a protected resource without being logged in
 	{
 		header( "Location: login.php" );
 		die();

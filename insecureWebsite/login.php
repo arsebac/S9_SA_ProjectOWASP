@@ -67,7 +67,7 @@ if (!empty($_GET['SESSID'])) {
 }
 session_start();
 
-if (isAdminLoggedIn() == TRUE)
+if (isLoggedIn() == TRUE)
 {
     header( "Location: dashboard.php" );
     die();
