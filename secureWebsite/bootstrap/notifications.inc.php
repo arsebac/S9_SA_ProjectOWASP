@@ -14,6 +14,12 @@
  * @copyright	2018
  */
 
+//Prevent direct access
+if (!defined('LICENSE'))
+{
+    exit('Access Denied');
+}
+
 /**
  * Notifications
  */
@@ -42,8 +48,8 @@ if (isset($_SESSION['msg1']) && isset($_SESSION['msg2']) && isset($_SESSION['msg
 	}
 ?> alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<strong><?php echo $_SESSION['msg1']; ?></strong><br />
-				<?php echo $_SESSION['msg2']; ?>
+				<strong><?php echo htmlspecialchars($_SESSION['msg1'], ENT_QUOTES); ?></strong><br />
+				<?php echo htmlspecialchars($_SESSION['msg2'], ENT_QUOTES); ?>
 			</div>
 <?php
 	unset($_SESSION['msg1']);

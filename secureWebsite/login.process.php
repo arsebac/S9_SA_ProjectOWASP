@@ -51,10 +51,15 @@ switch(@$TASK)
 			$db_query = $dbh->prepare("
 				SELECT *
 				FROM ".DBNAME.".".DBPREFIX."user
-				WHERE `login` = :login AND `password` = :password");
+				WHERE
+				    login = :login AND
+				    password = :password
+				");
 
-            $db_query->bindValue(':login', $login);
+            $db_query->bindValue(':login', $username);
             $db_query->bindValue(':password', $password);
+
+            $db_query->execute();
 
             $result = $db_query->fetchAll();
 
