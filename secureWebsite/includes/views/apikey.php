@@ -27,7 +27,7 @@ if (session_status() != PHP_SESSION_NONE && unserialize($_SESSION['user'])['role
             <div class="jumbotron" id="secret">
                 <h1>API SECRET KEY</h1>
                 <h3>Reserved To Administrators</h3>
-                <p class="bg-info"><?php echo API_KEY; ?></p>
+                <p class="bg-info"><?php echo htmlspecialchars(API_KEY, ENT_QUOTES); ?></p>
             </div>
         </div>
     </div>
