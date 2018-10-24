@@ -20,6 +20,12 @@ if (!defined('LICENSE'))
 	exit('Access Denied');
 }
 
+if (
+        (session_status() == PHP_SESSION_NONE) ||
+        (!empty($_SESSION['user']) && unserialize($_SESSION['user'])['role'] != 'Administrator')) {
+    exit('Access Denied');
+}
+
 ?>
 					<fieldset>
 						<legend>Application settings</legend>
