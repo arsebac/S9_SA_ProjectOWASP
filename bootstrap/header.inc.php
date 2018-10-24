@@ -38,14 +38,6 @@ if (!defined('LICENSE'))
 			<link href="./bootstrap/css/themes/<?php echo TEMPLATE; ?>" rel="stylesheet">
 			<link href="./bootstrap/css/dashboard.css" rel="stylesheet">
 			<link href="./bootstrap/css/go-to-top.css" rel="stylesheet">
-		<!-- Google web fonts -->
-			<link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel='stylesheet'>
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-			<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-			<!--[if lt IE 9]>
-			  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-			  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-			<![endif]-->
 		<!-- Favicon -->
 			<link rel="shortcut icon" href="./bootstrap/img/favicon.ico">
 	</head>
