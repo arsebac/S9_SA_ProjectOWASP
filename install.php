@@ -103,17 +103,17 @@ CREATE TABLE IF NOT EXISTS `".DBPREFIX."user` (
 
 	$dbh->exec( "
 INSERT INTO `".DBPREFIX."user` (`id`, `role`,`login`, `firstname`, `lastname`, `password`, `mail`) VALUES
-(1, 'Administrator', 'admin', '', '', '6a3ac84c61d057862c987bd50b3280e9', 'admin@localdomain');
+(1, 'Administrator', 'admin', '', '', 'password', 'admin@localdomain');
 " );
 
     $dbh->exec( "
 INSERT INTO `".DBPREFIX."user` (`id`, `role`,`login`, `firstname`, `lastname`, `password`, `mail`) VALUES
-(2, 'Administrator', 'alice', 'Alice', '', '6a3ac84c61d057862c987bd50b3280e9', 'alice@localdomain');
+(2, 'Administrator', 'alice', 'Alice', '', 'password', 'alice@localdomain');
 " );
 
     $dbh->exec( "
 INSERT INTO `".DBPREFIX."user` (`id`, `role`,`login`, `firstname`, `lastname`, `password`, `mail`) VALUES
-(3, 'Regular', 'bob', 'Bob', '', '6a3ac84c61d057862c987bd50b3280e9', 'bob@localdomain');
+(3, 'Regular', 'bob', 'Bob', '', 'password', 'bob@localdomain');
 " );
 
     // --------------------------------------------------------

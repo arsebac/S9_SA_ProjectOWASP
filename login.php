@@ -20,40 +20,43 @@ $PAGE = 'login';
 
 require( realpath(dirname(__FILE__)).'/conf.inc.php' );
 require( PROJECT_DIR.'/includes/func.inc.php' );
-error_reporting(0);
 
 /**
  * MySQL connection
  */
 try {
-	// Connect to MySQL
-    $connect = mysql_connect(DBHOST,DBUSER,DBPASSWORD);
-    mysql_select_db(DBNAME) or die(mysql_error());
+    // Connect to MySQL
+    $dbh = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME, DBUSER, DBPASSWORD);
+
+    // Set errormode to exceptions
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch (PDOException $e) {
-	echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine();
-	die();
+    echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine();
+    die();
 }
 
 /**
  * Retrieve more configuration settings from the MySQL database
  */
 try {
-
-
-    $result = mysql_query("
+    $sth = $dbh->prepare("
 			SELECT *
 			FROM ".DBNAME.".".DBPREFIX."config
 			;");
-    while ($row = mysql_fetch_assoc($result)) {
-        define( $row['setting'], $row['value'] );
+
+    $sth->execute();
+    $settings = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($settings as $setting) {
+        define( $setting['setting'], $setting['value'] );
     }
-	unset($settings);
-    mysql_close($connect);
+
+    unset($settings, $dbh);
 }
 catch (PDOException $e) {
-	echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine();
-	die();
+    echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine();
+    die();
 }
 
 /**
@@ -66,8 +69,8 @@ session_start();
 
 if (isAdminLoggedIn() == TRUE)
 {
-	header( "Location: dashboard.php" );
-	die();
+    header( "Location: dashboard.php" );
+    die();
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
