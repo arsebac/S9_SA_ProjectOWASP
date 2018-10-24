@@ -46,8 +46,8 @@ function isLoggedIn()
  */
 function logout()
 {
-	session_destroy();
     $_SESSION = array();
+	session_destroy();
     session_regenerate_id(true);
 }
 
