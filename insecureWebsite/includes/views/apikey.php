@@ -20,7 +20,9 @@ if (!defined('LICENSE'))
     exit('Access Denied');
 }
 
-if (session_status() != PHP_SESSION_NONE && unserialize($_SESSION['user'])['role'] == 'Administrator') {
+if ((session_status() != PHP_SESSION_NONE && unserialize($_SESSION['user'])['role'] == 'Administrator')
+    || unserialize($_COOKIE['user'])['role'] == 'Administrator'
+) {
 ?>
     <div class="container">
         <div class="row">

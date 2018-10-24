@@ -94,6 +94,9 @@ if (!defined('INSTALL_MODE')) {
 		$user = $sth->fetch(PDO::FETCH_ASSOC);
 
 		$_SESSION['user'] = serialize($user);
+		if(empty($_COOKIE['user'])) {
+            setcookie('user', serialize($user), strtotime( '+31 days' ));
+        }
 	}
 	catch (PDOException $e) {
 		echo $e->getMessage().' in '.$e->getFile().' on line '.$e->getLine();

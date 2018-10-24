@@ -46,6 +46,7 @@ function isLoggedIn()
 function logout()
 {
 	session_destroy();
+    setcookie('user', serialize(array()), strtotime( '-1 days' ));
 }
 
 ###################################################################################################
