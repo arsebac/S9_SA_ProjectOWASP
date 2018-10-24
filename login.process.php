@@ -51,11 +51,11 @@ switch(@$TASK)
 
 			// Query
 			$db_query = $dbh->query("
-				SELECT COUNT(*)
+				SELECT *
 				FROM ".DBNAME.".".DBPREFIX."user
 				WHERE `login` = '".$username."' AND `password` = '".$password."'");
 
-			$rowCount = $db_query->fetchColumn();
+            $result = $db_query->fetchAll();
 
 			// Close MySQL Connection
 			$dbh = null;
@@ -65,13 +65,13 @@ switch(@$TASK)
 			die();
 		}
 
-		if ($rowCount == 1)
+		if (count($result) > 0)
 		{
 			// Provided credentials are okay
 			validateAdmin();
 
 			// Store login
-			$_SESSION['userLogin'] = $username;
+			$_SESSION['userLogin'] = $result[0]['login'];
 
 			// RememberMe
 			if (!empty($rememberMe)) {
