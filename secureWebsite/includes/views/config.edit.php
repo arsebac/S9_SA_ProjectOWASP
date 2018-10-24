@@ -131,7 +131,13 @@ foreach ($templates as $name => $filename) {
 
                             xhr.onreadystatechange = function() {//Call a function when the state changes.
                                 if(this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                                    $('#exampleModal').modal('hide');
+                                    console.log(this.responseText );
+                                    if(this.responseText === "ok"){
+
+                                        $('#exampleModal').modal('hide');
+                                    }else{
+                                        alert("La configuration n'est pas conforme.");
+                                    }
                                 }
                             }
                             xhr.send("value="+encodeURI(value));
