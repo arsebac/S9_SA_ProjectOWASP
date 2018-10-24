@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASAP - Open Web Application Security Project
+ * OWASP - Open Web Application Security Project
  * ____________________________________
  * Copyright 2018
  *
@@ -36,7 +36,7 @@ if (!defined('LICENSE'))
 			<a href="#" class="go-top"><span class="glyphicon glyphicon-arrow-up"></span>&nbsp;Go Top</a>
 			<footer>
 				<div class="pull-left">
-                    OWASAP - Open Web Application Security Project - Copyright &copy; 2018
+                    OWASP - Open Web Application Security Project - Copyright &copy; 2018
 				</div>
 				<div class="pull-right" style="text-align: right;">
                     Joël CANCELA, Nikita ROUSSEAU, Francois MELKONIAN

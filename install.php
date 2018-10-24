@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASAP - Open Web Application Security Project
+ * OWASP - Open Web Application Security Project
  * ____________________________________
  * Copyright 2018
  *
@@ -25,7 +25,7 @@ require( PROJECT_DIR.'/includes.inc.php' );
 <html lang="fr_FR">
 	<head>
 		<meta charset="utf-8">
-		<title>OWASAP - Open Web Application Security Project - INSTALLER</title>
+		<title>OWASP - Open Web Application Security Project - INSTALLER</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Javascript -->
@@ -76,17 +76,19 @@ try {
 
 	/*
 	--
-	-- Structure de la table `admin`
+	-- Structure de la table `user`
 	--
 	*/
 	
-	$dbh->exec( "DROP TABLE IF EXISTS `".DBPREFIX."admin`" );
+	$dbh->exec( "DROP TABLE IF EXISTS `".DBPREFIX."user`" );
 	$dbh->exec( "
-CREATE TABLE IF NOT EXISTS `".DBPREFIX."admin` (
+CREATE TABLE IF NOT EXISTS `".DBPREFIX."user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role` varchar(45) NOT NULL,
   `login` varchar(45) NOT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
   `mail` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`)
@@ -95,16 +97,26 @@ CREATE TABLE IF NOT EXISTS `".DBPREFIX."admin` (
 
 	/*
 	--
-	-- Contenu de la table `admin`
+	-- Contenu de la table `user`
 	--
 	*/
 
 	$dbh->exec( "
-INSERT INTO `".DBPREFIX."admin` (`id`, `login`, `password`, `name`, `mail`) VALUES
-(1, 'admin', '6a3ac84c61d057862c987bd50b3280e9', 'Administrator', 'admin@localdomain');
+INSERT INTO `".DBPREFIX."user` (`id`, `role`,`login`, `firstname`, `lastname`, `password`, `mail`) VALUES
+(1, 'Administrator', 'admin', '', '', '6a3ac84c61d057862c987bd50b3280e9', 'admin@localdomain');
 " );
 
-	// --------------------------------------------------------
+    $dbh->exec( "
+INSERT INTO `".DBPREFIX."user` (`id`, `role`,`login`, `firstname`, `lastname`, `password`, `mail`) VALUES
+(2, 'Administrator', 'alice', 'Alice', '', '6a3ac84c61d057862c987bd50b3280e9', 'alice@localdomain');
+" );
+
+    $dbh->exec( "
+INSERT INTO `".DBPREFIX."user` (`id`, `role`,`login`, `firstname`, `lastname`, `password`, `mail`) VALUES
+(3, 'Regular', 'bob', 'Bob', '', '6a3ac84c61d057862c987bd50b3280e9', 'bob@localdomain');
+" );
+
+    // --------------------------------------------------------
 
 	/*
 	--
@@ -131,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `".DBPREFIX."config` (
 	$dbh->exec( "
 INSERT INTO `".DBPREFIX."config` (`setting`, `value`) VALUES
 ('TEMPLATE', 'bootstrap.min.css'),
-('TITLE', 'OWASAP - Open Web Application Security Project');
+('TITLE', 'OWASP - Open Web Application Security Project');
 " );
 	
 	// --------------------------------------------------------
@@ -157,7 +169,7 @@ catch (PDOException $e) {
 			<a href="#" class="go-top"><span class="glyphicon glyphicon-arrow-up"></span>&nbsp;Go Top</a>
             <footer>
                 <div class="pull-left">
-                    OWASAP - Open Web Application Security Project - Copyright &copy; 2018
+                    OWASP - Open Web Application Security Project - Copyright &copy; 2018
                 </div>
                 <div class="pull-right" style="text-align: right;">
 					Joël CANCELA, Nikita ROUSSEAU, Francois MELKONIAN

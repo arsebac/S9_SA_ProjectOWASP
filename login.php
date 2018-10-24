@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASAP - Open Web Application Security Project
+ * OWASP - Open Web Application Security Project
  * ____________________________________
  * Copyright 2018
  *
@@ -76,26 +76,6 @@ require( STYLE_DIR.'/header.inc.php' );
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-if (!empty($_SESSION['lockout']) && ((time() - 60 * 10) < $_SESSION['lockout']))
-{
-?>
-			<div class="alert alert-block">
-				<h4 class="alert-heading">Too Many Incorrect Login Attempts</h4>
-			</div>
-<?php
-}
-else
-{
-	if (isset($_SESSION['loginerror']))
-	{
-?>
-			<div class="alert alert-warning alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<strong>Warning!</strong> Authentication failed !
-			</div>
-<?php
-		unset($_SESSION['loginerror']);
-	}
 ?>
 
 			<div class="container">
@@ -136,7 +116,8 @@ else
 	?>>&nbsp;Remember Me
 										</label>
 									</div>
-									<input class="btn btn-lg btn-info btn-block" type="submit" value="Login">
+									<input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
+                                   <a class="btn btn-lg btn-info btn-block" href="./register.php" role="button">Register</a>
 								</fieldset>
 								</form>
 							</div>
@@ -146,7 +127,7 @@ else
 			</div>
 
 <?php
-}
+
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 

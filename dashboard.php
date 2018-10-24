@@ -1,6 +1,6 @@
 <?php
 /**
- * OWASAP - Open Web Application Security Project
+ * OWASP - Open Web Application Security Project
  * ____________________________________
  * Copyright 2018
  *
@@ -55,6 +55,12 @@ switch ($VIEW)
 		require(VIEWS_DIR.'config'.'.'.'edit'.'.php');
 		break;
 
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    case 'apikey':
+        require(VIEWS_DIR.'apikey'.'.php');
+        break;
+
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 				
 	// Default dashboard
@@ -64,20 +70,28 @@ switch ($VIEW)
 
 					<div>
 						<legend>
-							&nbsp;Welcome on <i>OWASAP - Open Web Application Security Project</i>, <a href="#"><?php echo htmlspecialchars($_SESSION['adminName']); ?></a>
+							&nbsp;Welcome on <i><?php echo TITLE; ?></i>, <a href="#"><?php echo htmlspecialchars(unserialize($_SESSION['user'])['login']); ?></a>
 						</legend>
 					</div>
 
 					<div class="bs-glyphicons">
 						<ul class="bs-glyphicons-list">
-							<li href="#" onclick="dashboardLocation('config')" type="button">
-								<span class="glyphicon glyphicon-wrench"></span>
-								<span class="glyphicon-class">Configuration Panel</span>
-							</li>
-                            <li href="#"  data-toggle="modal" data-target="#exampleModal" type="button">
-                                <span class="glyphicon glyphicon-modal-window"></span>
-                                <span class="glyphicon-class material-icons">Configuration Panel</span>
-                            </li>
+                            <?php
+
+                            if (session_status() != PHP_SESSION_NONE && unserialize($_SESSION['user'])['role'] == 'Administrator') {
+                                ?>
+                                <li href="#" onclick="dashboardLocation('config')" type="button">
+                                    <span class="glyphicon glyphicon-wrench"></span>
+                                    <span class="glyphicon-class">Configuration Panel</span>
+                                </li>
+                                <li href="#" onclick="dashboardLocation('apikey')" type="button">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                    <span class="glyphicon-class">SECRET API KEY</span>
+                                </li>
+                                <?php
+                            }
+
+                            ?>
 						</ul>
 					</div>
 
