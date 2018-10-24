@@ -49,6 +49,22 @@ require( STYLE_DIR.'/notifications.inc.php' );
 
 switch ($VIEW)
 {
+    case 'article':
+        switch ($TASK)
+        {
+            case 'add':
+                require(VIEWS_DIR.'article'.'.'.'add'.'.php');
+                break;
+
+            case 'edit':
+                require(VIEWS_DIR.'article'.'.'.'edit'.'.php');
+                break;
+
+            default:
+                require(VIEWS_DIR.'article.php');
+        }
+        break;
+
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 	case 'config':
@@ -76,6 +92,14 @@ switch ($VIEW)
 
 					<div class="bs-glyphicons">
 						<ul class="bs-glyphicons-list">
+                            <li href="#" onclick="dashboardLocation('article')" type="button">
+                                <span class="glyphicon glyphicon-file"></span>
+                                <span class="glyphicon-class">Livre d'or</span>
+                            </li>
+                            <li href="#" onclick="dashboardLocation('article&task=add')" type="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="glyphicon-class">Ecrire un article</span>
+                            </li>
                             <?php
 
                             if (session_status() != PHP_SESSION_NONE && unserialize($_SESSION['user'])['role'] == 'Administrator') {

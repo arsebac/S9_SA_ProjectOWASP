@@ -77,6 +77,14 @@ if ($PAGE != 'login' && $PAGE != 'register')
 							&nbsp;Dashboard
 						</a>
 					</li>
+                    <!-- PUBLIC VIEWS -->
+                    <li <?php
+                    if (($PAGE == 'dashboard') && ($VIEW == 'article'))
+                    {
+                        echo "class=\"active\"";
+                    }
+                    ?>><?php echo generateNavigationLi('article', 'glyphicon-file'); ?></li>
+                    <!-- PRIVATE VIEWS -->
                     <?php
 
                     if (session_status() != PHP_SESSION_NONE && unserialize($_SESSION['user'])['role'] == 'Administrator') {
