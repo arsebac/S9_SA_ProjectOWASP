@@ -1,0 +1,6 @@
+<Files api.cron.php>
+
+AuthName "403"
+deny from all
+
+</Files>
