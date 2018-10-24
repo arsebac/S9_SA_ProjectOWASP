@@ -21,9 +21,6 @@ require(PROJECT_DIR . '/includes/func.inc.php');
  * Authentication
  */
 session_start();
-if (!empty($_GET['SESSID'])) {
-    session_id ($_GET['SESSID']);
-}
 
 if (isset($_POST['task']))
 {
@@ -51,10 +48,13 @@ switch(@$TASK)
 							  PDO::ERRMODE_EXCEPTION);
 
 			// Query
-			$db_query = $dbh->query("
+			$db_query = $dbh->prepare("
 				SELECT *
 				FROM ".DBNAME.".".DBPREFIX."user
-				WHERE `login` = '".$username."' AND `password` = '".$password."'");
+				WHERE `login` = :login AND `password` = :password");
+
+            $db_query->bindValue(':login', $login);
+            $db_query->bindValue(':password', $password);
 
             $result = $db_query->fetchAll();
 

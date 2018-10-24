@@ -55,7 +55,7 @@ $articles = $sth->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $article['title']; ?></td>
                     <td>
                         <a href="dashboard.php?view=article&amp;task=edit&amp;id=<?php echo $article['id']; ?>" type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span>&nbsp;Editer</a>&nbsp;
-                        <a href="#" onclick="deleteArticle('<?php echo $article['id']; ?>', '<?php echo htmlspecialchars($article['title']); ?>')" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>&nbsp;Supprimer</a>
+                        <a href="#" onclick="deleteArticle('<?php echo $article['id']; ?>', '<?php echo htmlspecialchars($article['title'], ENT_QUOTES); ?>')" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>&nbsp;Supprimer</a>
                     </td>
                 </tr>
                 <?php

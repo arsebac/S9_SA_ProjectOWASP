@@ -29,9 +29,6 @@ if (!defined('INSTALL_MODE')) {
 	/**
 	 * Authentication
 	 */
-    if (!empty($_GET['SESSID'])) {
-        session_id ($_GET['SESSID']);
-    }
 	session_start();
 
 	if (isLoggedIn() == FALSE) //Check if the user have wanted to access to a protected resource without being logged in

@@ -62,9 +62,6 @@ catch (PDOException $e) {
 /**
  * Authentication
  */
-if (!empty($_GET['SESSID'])) {
-    session_id ($_GET['SESSID']);
-}
 session_start();
 
 if (isLoggedIn() == TRUE)
@@ -98,7 +95,7 @@ require( STYLE_DIR.'/header.inc.php' );
 
 	if (!empty($_COOKIE['rememberMe']))
 	{
-		echo htmlspecialchars($_COOKIE['rememberMe']);
+		echo htmlspecialchars($_COOKIE['rememberMe'], ENT_QUOTES);
 	}
 
 	?>" placeholder="username">

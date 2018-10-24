@@ -25,7 +25,7 @@ if (!defined('LICENSE'))
 <html lang="fr_FR">
 	<head>
 		<meta charset="utf-8">
-		<title><?php echo TITLE; ?></title>
+		<title><?php echo htmlspecialchars(TITLE, ENT_QUOTES); ?></title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Javascript -->
@@ -35,7 +35,7 @@ if (!defined('LICENSE'))
 			<script src="./bootstrap/js/go-to-top.js"></script>
 		<!-- Style -->
 			<!-- Boostrap -->
-			<link href="./bootstrap/css/themes/<?php echo TEMPLATE; ?>" rel="stylesheet">
+			<link href="./bootstrap/css/themes/<?php echo htmlspecialchars(TEMPLATE, ENT_QUOTES); ?>" rel="stylesheet">
 			<link href="./bootstrap/css/dashboard.css" rel="stylesheet">
 			<link href="./bootstrap/css/go-to-top.css" rel="stylesheet">
 		<!-- Favicon -->
@@ -148,13 +148,13 @@ if ($PAGE != 'login' && $PAGE != 'register')
 	// Level 2 - Category
 	if (!empty($VIEW))
 	{
-		echo "\t\t\t\t<li><a href=\"dashboard.php?view=" . urlencode($VIEW) . "\">". htmlspecialchars( ucfirst( $VIEW ) )."</a></li>\r\n";
+		echo "\t\t\t\t<li><a href=\"dashboard.php?view=" . urlencode($VIEW) . "\">". htmlspecialchars( ucfirst( $VIEW ), ENT_QUOTES )."</a></li>\r\n";
 	}
 
 	// Level 3 - Action
 	if (!empty($VIEW) && !empty($TASK))
 	{
-		echo "\t\t\t\t<li class=\"active\"><a href=\"dashboard.php?view=" . urlencode($VIEW) . "&amp;task=" . urlencode($TASK) . "\">". htmlspecialchars( ucfirst( $TASK ) )."</a></li>\r\n";
+		echo "\t\t\t\t<li class=\"active\"><a href=\"dashboard.php?view=" . urlencode($VIEW) . "&amp;task=" . urlencode($TASK) . "\">". htmlspecialchars( ucfirst( $TASK ), ENT_QUOTES )."</a></li>\r\n";
 	}
 
 }
@@ -178,6 +178,6 @@ if ($PAGE != 'login' && $PAGE != 'register')
 				<div class="col-md-12">
 
 					<div class="page-header">
-						<h1><?php if (!empty($TITLE)) { echo $TITLE; } ?>&nbsp;<small><?php if (!empty($SUBTITLE)) { echo $SUBTITLE; } ?></small></h1>
+						<h1><?php if (!empty($TITLE)) { echo htmlspecialchars($TITLE, ENT_QUOTES); } ?>&nbsp;<small><?php if (!empty($SUBTITLE)) { echo htmlspecialchars($SUBTITLE, ENT_QUOTES); } ?></small></h1>
 					</div>
 

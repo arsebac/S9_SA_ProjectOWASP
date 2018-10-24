@@ -10,7 +10,6 @@
 	// <DO NOT CHANGE>
 	define('PROJECT_DIR', realpath(dirname(__FILE__)));
 	define('CONF_DIR', PROJECT_DIR.'/conf/');
-	define('CONF_FILE', CONF_DIR.'/conf.ini');
 	define('STYLE_DIR', PROJECT_DIR.'/bootstrap/');
 	define('TEMPLATES_DIR', STYLE_DIR.'/css/themes/');
 	define('VIEWS_DIR', PROJECT_DIR.'/includes/views/');
@@ -22,35 +21,25 @@
      */
     define('API_KEY', 'b0955e13a8fb37eced8cee17a5ecd51f');
 
-	/**
-	 * Global Configuration
-	 */
-	$CONFIG = parse_ini_file( CONF_FILE, TRUE );
+    /**
+     * CMS General Configuration
+     */
+    // Salt used by the crypt function
+    define('CRYPTOSALT', "Aqwn-jklm_p098!TGB1*23");
 
-	/**
-	 * General CMS Configuration
-	 *
-	 *	CRYPTOSALT
-	 */
-	foreach ($CONFIG['General'] as $setting => $value) {
-		define( $setting, $value );
-	}
-
-	/**
-	 * MySQL Configuration
-	 *
-	 * 	DBHOST
-	 *	DBNAME
-	 *	DBUSER
-	 *	DBPASSWORD
-	 *	DBPREFIX
-	 */
-	foreach ($CONFIG['Database'] as $setting => $value) {
-		define( $setting, $value );
-	}
-
-	// Clean
-	unset($CONFIG);
+    /**
+     * MySQL Configuration
+     */
+    // DBHOST is the MySQL Database Hostname
+    define('DBHOST', "localhost");
+    // DBNAME is the MySQL Database Name
+    define('DBNAME', "owasp");
+    // DBUSER is the MySQL Database Username
+    define('DBUSER', "root");
+    // DBPASSWORD is the MySQL Database Password
+    define('DBPASSWORD', "");
+    // DBPREFIX is the MySQL Table Prefix
+    define('DBPREFIX', "cms_");
 
 	/**
 	 * DATE Configuration

@@ -27,7 +27,7 @@ if (!defined('LICENSE'))
 							<form action="process.php" method="post" role="form">
 								<div class="col-md-9">
 									<input type="hidden" name="task" value="article add" />
-                                    <input type="hidden" name="idAuthor" value="<?php echo htmlspecialchars(unserialize($_SESSION['user'])['id']); ?>" />
+                                    <input type="hidden" name="idAuthor" value="<?php echo htmlspecialchars(unserialize($_SESSION['user'])['id'], ENT_QUOTES); ?>" />
 		
 									<div class="row">
 										<div class="form-group col-xs-12">
@@ -67,7 +67,7 @@ if (!defined('LICENSE'))
 									<div class="panel panel-default">
 										<div class="panel-body">
 											<b>Auteur :</b><br/>
-											<?php echo htmlspecialchars(unserialize($_SESSION['user'])['login']); ?><br/><br/>
+											<?php echo htmlspecialchars(unserialize($_SESSION['user'])['login'], ENT_QUOTES); ?><br/><br/>
 											<b>Date :</b><br/>
 											<?php echo date("l | F j, Y | H:i"); ?>
 										</div>

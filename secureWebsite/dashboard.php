@@ -86,7 +86,7 @@ switch ($VIEW)
 
 					<div>
 						<legend>
-							&nbsp;Welcome on <i><?php echo TITLE; ?></i>, <a href="#"><?php echo htmlspecialchars(unserialize($_SESSION['user'])['login']); ?></a>
+							&nbsp;Welcome on <i><?php echo htmlspecialchars(TITLE, ENT_QUOTES); ?></i>, <a href="#"><?php echo htmlspecialchars(unserialize($_SESSION['user'])['login'], ENT_QUOTES); ?></a>
 						</legend>
 					</div>
 
@@ -124,7 +124,6 @@ switch ($VIEW)
 					{
 						window.location.href='dashboard.php?view='+location;
 					}
-
 					</script>
 
 <?php

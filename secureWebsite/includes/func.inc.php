@@ -25,6 +25,7 @@
  */
 function validateAdmin()
 {
+    session_regenerate_id(true);
 	$_SESSION['isLoggedIn'] = TRUE;
 }
 
@@ -46,6 +47,8 @@ function isLoggedIn()
 function logout()
 {
 	session_destroy();
+    $_SESSION = array();
+    session_regenerate_id(true);
 }
 
 ###################################################################################################
@@ -63,7 +66,7 @@ function logout()
 function generateNavigationLi($view = '', $icon = '') {
 	$view = strtolower($view);
 
-	?><a href="dashboard.php?view=<?php echo urlencode($view); ?>"><span class="glyphicon <?php echo htmlspecialchars($icon); ?>"></span>&nbsp;<?php echo htmlspecialchars(ucfirst($view)); ?></a><?php
+	?><a href="dashboard.php?view=<?php echo urlencode($view); ?>"><span class="glyphicon <?php echo htmlspecialchars($icon, ENT_QUOTES); ?>"></span>&nbsp;<?php echo htmlspecialchars(ucfirst($view), ENT_QUOTES); ?></a><?php
 
 }
 
