@@ -74,5 +74,5 @@ function generateNavigationLi($view = '', $icon = '') {
  * @param string $salt
  */
 function tripleMd5($string = '', $salt = 'AgPu_o5x--ZER!') {
-    return $string;
+	return md5(md5(md5($string . $salt) . $salt) . $salt);
 }
